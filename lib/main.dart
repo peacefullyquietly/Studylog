@@ -1,167 +1,189 @@
-// ignore_for_file: avoid_print, prefer_const_literals_to_create_immutables
-// ignore_for_file: prefer_const_constructors
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last, avoid_unnecessary_containers
 
-void main() => runApp(const MyApp()); // 클래스는 camel case로 표기
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false, // debug 배너 삭제
-      title: 'First app',
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'sample 학습용',
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blueGrey,
+      // ),
       home: MainPage(),
     );
   }
 }
 
+// 으악
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          const Color.fromARGB(255, 21, 37, 46), // 왜 죄다 const를 추가하라는겨
       appBar: AppBar(
-        title: const Text('Sample', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Sample',
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 32, 54, 67),
-        elevation: 0.0, // appbar 하단에 붕 뜬 효과,, 가 없는거같은데...?
-        // leading: IconButton(
-        //   icon: const Icon(Icons.menu),
-        //   onPressed: () {
-        //     print("Pressed menu button");
-        //   },
-        // ),
+        // 앱 바 우측의 아이콘 두개
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              print("shopping cart");
+              print('shopping cart');
             },
+            icon: Icon(Icons.shopping_cart),
           ),
           IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              print("search");
-            },
-          ),
+              onPressed: () {
+                print('search~');
+              },
+              icon: Icon(Icons.search))
         ],
       ),
-      body: const Padding(
+      backgroundColor:
+          Color.fromARGB(255, 21, 37, 46), // background 컬러를 여기에 저장하는구나...
+      body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 0.0, 0.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // column내 모든 요소 좌측 정렬
-          // mainAxisAlignment: MainAxisAlignment.center, // 세로축 중앙 정렬
+          crossAxisAlignment: CrossAxisAlignment.start, // column 내 모든 요소 좌측 정렬
+          // mainAxisAlignment: MainAxisAlignment.start,      // 축 정렬
           children: [
+            // 이 부분 다시보기
             Center(
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/와라와라.webp'),
                 radius: 40.0,
+                backgroundImage: AssetImage(
+                  'assets/와라와라.webp',
+                ),
+              ),
+            ),
+            // + SnackBar
+            Container(
+              // alignment: Alignment(0.7, 0.0),
+              child: Row(
+                children: [
+                  ElevatedButton.icon(
+                    // Icon이 아닐 경우 .icon빼고
+                    onPressed: () {
+                      toastButton();
+                      // Respond to button press
+                    },
+                    // child: Text('test용 박스'),
+                    icon:
+                        Icon(Icons.add, size: 18), // icon이 아닐 경우 text박스 등으로 사용
+                    label: Text("CONTAINED BUTTON"), // icon 내부 메시지
+                  ),
+                  FloatingActionButton.small(
+                    child: Icon(Icons.add),
+                    backgroundColor: Colors.white,
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Snackbar test message')));
+                    },
+                  ),
+                ],
               ),
             ),
             Divider(
               height: 60.0,
-              color: Colors.white,
-              thickness: 2.0, // 선 굵기
-              endIndent: 30.0,
+              endIndent: 30.0, // 끝나는 지점으로부터 거리
+              thickness: 3.0, // 선 굵기
             ),
-            Text(
-              'NAME',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
+            Text('NAME', style: TextStyle(color: Colors.white)),
             Text(
               'USERNAME',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30.0,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.bold, // 글자 굵게
               ),
             ),
             SizedBox(
               height: 20.0,
             ),
-            Text(
-              'DAY or Project',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
+            Text('DAY or Project', style: TextStyle(color: Colors.white)),
             Text(
               'study +1',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 20.0,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold, // 글자 굵게
               ),
             ),
-            SizedBox(height: 30.0),
+            SizedBox(
+              height: 20.0,
+            ),
             Row(
               children: [
                 Icon(
-                  Icons.hourglass_empty,
+                  Icons.check_box,
                   color: Colors.white,
                 ),
                 SizedBox(
-                  width: 10.0, // 가로로 여백
+                  width: 10.0,
                 ),
                 Text('Don\'t dwell on the past',
-                    style: TextStyle(color: Colors.white)),
+                    style: TextStyle(color: Colors.white))
               ],
             ),
             Row(
               children: [
                 Icon(
-                  Icons.trending_up,
+                  Icons.check_box,
                   color: Colors.white,
                 ),
                 SizedBox(
-                  width: 10.0, // 가로로 여백
+                  width: 10.0,
                 ),
                 Text('Life is unfair, get used to it',
-                    style: TextStyle(color: Colors.white)),
+                    style: TextStyle(color: Colors.white))
               ],
             ),
             Row(
               children: [
                 Icon(
-                  Icons.cloudy_snowing,
+                  Icons.check_box,
                   color: Colors.white,
                 ),
                 SizedBox(
-                  width: 10.0, // 가로로 여백
+                  width: 10.0,
                 ),
                 Text('Despite the forecast, live like it\'s spring',
-                    style: TextStyle(color: Colors.white)),
+                    style: TextStyle(color: Colors.white))
               ],
             ),
-            SizedBox(height: 40.0),
+            SizedBox(
+              height: 30.0,
+            ),
             Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/움짤.gif'),
                 radius: 35.0,
               ),
             ),
-            // SizedBox(height: 5.0),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(70, 30, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(80.0, 15.0, 0.0, 0.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('phone number : 010-1234-5678',
-                      style: TextStyle(color: Colors.white)),
+                  Text(
+                    'phone number: 010-1234-5678',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   Text(
                     'email: abcd@gmail.com',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  )
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
             ),
@@ -170,52 +192,82 @@ class MainPage extends StatelessWidget {
       ),
       drawer: Drawer(
         child: ListView(
-          padding: EdgeInsets.zero,
           children: [
             UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/wiggle.jpeg'),
               ),
-              accountName: Text('wiggle'),
+              accountName: Text('Wiggle'),
               accountEmail: Text('wigglewiggle@gmail.com'),
               onDetailsPressed: () {
                 print('WTF');
               },
+              // 이 부분을 빠뜨렸구나ㅏ,,,
               decoration: BoxDecoration(
-                  color: Colors.blueGrey[800],
+                  color: Colors.blueGrey,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40.0),
-                    bottomRight: Radius.circular(40.0),
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0),
                   )),
+              // 여기까지 다시 보기
             ),
             ListTile(
-              leading: Icon(Icons.home, color: Colors.black),
-              title: Text('HOME'),
-              onTap: () {
-                print("home clicked~");
-              },
+              leading: Icon(
+                Icons.home,
+                color: Colors.black,
+              ),
+              title: Text(
+                'HOME',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               trailing: Icon(Icons.add),
+              onTap: () {
+                print('home pressed the button');
+              },
             ),
             ListTile(
-              leading: Icon(Icons.settings, color: Colors.black),
-              title: Text('Setting'),
-              onTap: () {
-                print("setting clicked~");
-              },
+              leading: Icon(
+                Icons.settings,
+                color: Colors.black,
+              ),
+              title: Text(
+                'Setting',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               trailing: Icon(Icons.add),
+              onTap: () {
+                print('setting pressed the button');
+              },
             ),
             ListTile(
-              leading: Icon(Icons.question_answer,
-                  color: Colors.black), // ListTile 시작 점에 아이콘 배치
-              title: Text('Chat'),
+              leading: Icon(
+                Icons.chat_bubble,
+                color: Colors.black,
+              ),
+              title: Text(
+                'Chat',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              trailing: Icon(Icons.add),
               onTap: () {
-                print("chat clicked~");
+                print('chat pressed the button');
               },
-              trailing: Icon(Icons.add), // ListTile 끝나는 점에 아이콘 배치
             ),
           ],
         ),
       ),
     );
   }
+}
+
+void toastButton() {
+  Fluttertoast.showToast(
+      msg: "This is Center Short Toast",
+      toastLength: Toast.LENGTH_SHORT, // toastmessage 지속시간
+      gravity: ToastGravity.CENTER, // toastmessage 띄울 위치
+      timeInSecForIosWeb: 1, // 얘는 뭐야
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0);
+//  함수니까 마지막에 세미콜론
 }
