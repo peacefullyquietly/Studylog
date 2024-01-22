@@ -1,273 +1,186 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print, sort_child_properties_last, avoid_unnecessary_containers
-
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_application_studylog/profile.dart';
+import 'package:flutter_application_studylog/mylog.dart';
+import 'package:flutter_application_studylog/grouplog.dart';
+import 'package:flutter_application_studylog/chatpage.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
+
+  static const String _title = 'Flutter Code Sample';
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'sample 학습용',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blueGrey,
-      // ),
-      home: MainPage(),
+
+      //_title 변수 불러오기..?
+      title: _title,
+      home: MyStatefulWidget(),
     );
   }
 }
 
-// 으악
-class MainPage extends StatelessWidget {
-  const MainPage({super.key});
+class MyStatefulWidget extends StatefulWidget {
+  const MyStatefulWidget({Key? key}) : super(key: key);
+
+  @override
+  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _selectedIndex = 0;
+  // static const TextStyle optionStyle =
+  //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  static const List<Widget> _widgetOptions = <Widget>[
+    IndividualPage(),
+    GroupPage(),
+    ChatPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Sample',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 32, 54, 67),
-        // 앱 바 우측의 아이콘 두개
-        actions: [
-          IconButton(
+        appBar: AppBar(
+          // title: const Text(
+          //   'Studylog Sample',
+          //   style: TextStyle(color: Colors.white),
+          // ),
+          leading: IconButton(
             onPressed: () {
-              print('shopping cart');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const profile()),
+              );
             },
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(
+              Icons.account_circle,
+              size: 40.0,
+            ),
           ),
-          IconButton(
-              onPressed: () {
-                print('search~');
-              },
-              icon: Icon(Icons.search))
-        ],
-      ),
-      backgroundColor:
-          Color.fromARGB(255, 21, 37, 46), // background 컬러를 여기에 저장하는구나...
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 0.0, 0.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start, // column 내 모든 요소 좌측 정렬
-          // mainAxisAlignment: MainAxisAlignment.start,      // 축 정렬
-          children: [
-            // 이 부분 다시보기
-            Center(
-              child: CircleAvatar(
-                radius: 40.0,
-                backgroundImage: AssetImage(
-                  'assets/와라와라.webp',
-                ),
-              ),
+          centerTitle: true,
+          backgroundColor: Color.fromARGB(255, 224, 221, 221),
+        ),
+        backgroundColor: const Color.fromARGB(255, 224, 221, 221),
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color.fromARGB(255, 81, 79, 79),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Individual',
             ),
-            // + SnackBar
-            Container(
-              // alignment: Alignment(0.7, 0.0),
-              child: Row(
-                children: [
-                  ElevatedButton.icon(
-                    // Icon이 아닐 경우 .icon빼고
-                    onPressed: () {
-                      toastButton();
-                      // Respond to button press
-                    },
-                    // child: Text('test용 박스'),
-                    icon:
-                        Icon(Icons.add, size: 18), // icon이 아닐 경우 text박스 등으로 사용
-                    label: Text("CONTAINED BUTTON"), // icon 내부 메시지
-                  ),
-                  FloatingActionButton.small(
-                    child: Icon(Icons.add),
-                    backgroundColor: Colors.white,
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Snackbar test message')));
-                    },
-                  ),
-                ],
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.group),
+              label: 'Group',
             ),
-            Divider(
-              height: 60.0,
-              endIndent: 30.0, // 끝나는 지점으로부터 거리
-              thickness: 3.0, // 선 굵기
-            ),
-            Text('NAME', style: TextStyle(color: Colors.white)),
-            Text(
-              'USERNAME',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold, // 글자 굵게
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text('DAY or Project', style: TextStyle(color: Colors.white)),
-            Text(
-              'study +1',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold, // 글자 굵게
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text('Don\'t dwell on the past',
-                    style: TextStyle(color: Colors.white))
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text('Life is unfair, get used to it',
-                    style: TextStyle(color: Colors.white))
-              ],
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.check_box,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Text('Despite the forecast, live like it\'s spring',
-                    style: TextStyle(color: Colors.white))
-              ],
-            ),
-            SizedBox(
-              height: 30.0,
-            ),
-            Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/움짤.gif'),
-                radius: 35.0,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(80.0, 15.0, 0.0, 0.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'phone number: 010-1234-5678',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    'email: abcd@gmail.com',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+              label: 'Chat',
             ),
           ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
+          onTap: _onItemTapped,
         ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/wiggle.jpeg'),
+        endDrawer: Drawer(
+            backgroundColor: Color.fromARGB(255, 224, 221, 221),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+              child: ListView(
+                children: [
+                  Text("  Add a Heading",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  SizedBox(height: 10.0),
+                  Container(
+                    color: Color.fromRGBO(193, 192, 192, 1),
+                    width: 80,
+                    height: 300,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 80.0),
+                        Center(
+                          child: Icon(
+                            Icons.image,
+                            size: 90.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(5, 0, 0, 50),
+                    child: Container(
+                      height: 200,
+                      // color: Color(0xffeeeeee),
+                      padding: EdgeInsets.all(10.0),
+                      child: new ConstrainedBox(
+                        // 최대 높이에 제약을 주는 역할
+                        constraints: BoxConstraints(
+                          maxHeight: 200.0,
+                        ),
+                        // 스크롤바를 표시하는 데 사용
+                        child: new Scrollbar(
+                          // 자식 위젯을 스크롤 할 수 있게 만듦
+                          child: new SingleChildScrollView(
+                            scrollDirection: Axis
+                                .vertical, // SingleChildScrollView 위젯이 수직방향으로 스크롤 가능하게 만듦
+                            // 새로운 텍스트가 추가될 때 자동으로 맨 아래로 스크롤되어 보이는 효과.
+                            reverse: true,
+                            child: SizedBox(
+                              height: 190.0,
+                              child: new TextField(
+                                // 최대 100줄 입력 가능
+                                maxLines: 100,
+                                decoration: new InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Add your text here',
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // TextField(
+                    //     // contentPadding: EdgeInsets.symmetric(vertical: 40),
+                    //     decoration: const InputDecoration(
+                    //   border: InputBorder.none,
+                    //   hintText: "To edit this text, .... ",
+                    //   contentPadding: const EdgeInsets.symmetric(vertical: 40.0),
+                    // )),
+                  ),
+                  ListTile(
+                    trailing: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.ios_share),
+                    ),
+                  )
+                ],
               ),
-              accountName: Text('Wiggle'),
-              accountEmail: Text('wigglewiggle@gmail.com'),
-              onDetailsPressed: () {
-                print('WTF');
-              },
-              // 이 부분을 빠뜨렸구나ㅏ,,,
-              decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0),
-                  )),
-              // 여기까지 다시 보기
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-              title: Text(
-                'HOME',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Icon(Icons.add),
-              onTap: () {
-                print('home pressed the button');
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Setting',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Icon(Icons.add),
-              onTap: () {
-                print('setting pressed the button');
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.chat_bubble,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Chat',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              trailing: Icon(Icons.add),
-              onTap: () {
-                print('chat pressed the button');
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+            )));
   }
-}
-
-void toastButton() {
-  Fluttertoast.showToast(
-      msg: "This is Center Short Toast",
-      toastLength: Toast.LENGTH_SHORT, // toastmessage 지속시간
-      gravity: ToastGravity.CENTER, // toastmessage 띄울 위치
-      timeInSecForIosWeb: 1, // 얘는 뭐야
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 16.0);
-//  함수니까 마지막에 세미콜론
 }
