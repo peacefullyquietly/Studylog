@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart'; // main.dart 파일을 import
 
 void main() => runApp(MyApp());
 
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
             leading: IconButton(
               icon: Icon(Icons.account_circle, size: 40),
               onPressed: () {
-                // TODO: Profile 아이콘을 눌렀을 때의 동작 추가
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                );
               },
             ),
             actions: [
