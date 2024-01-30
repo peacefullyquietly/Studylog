@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'detail.dart'; // detail.dart 파일을 import
 
 void main() => runApp(MyApp());
 
@@ -8,84 +7,83 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.account_circle, size: 40),
+      home: MyHomePage(), // MyHomePage를 직접 호출
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.account_circle, size: 40),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.menu, size: 40),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()), // MyHomePage 생성자 호출
-                );
+                // TODO: Menu 아이콘을 눌렀을 때의 동작 추가
               },
             ),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.menu, size: 40),
-                onPressed: () {
-                  // TODO: Menu 아이콘을 눌렀을 때의 동작 추가
-                },
+          ],
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Double click to edit',
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: Icon(Icons.clear),
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ],
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 10),
-              Text(
-                '      Add a heading',
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                '137 results found',
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Center(
-                child: Container(
-                  color: Color.fromRGBO(180, 180, 180, 1.0),
-                  width: 300,
-                  height: 300,
-                  margin: const EdgeInsets.all(5.0),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Icon(
-                          Icons.favorite,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                      Center(
-                        child: Icon(
-                          Icons.photo_library,
-                          size: 50,
-                        ),
-                      ),
-                    ],
-                  ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Another text field',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      '   To edit this text, select the text box and double click.',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
+            ),
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'Add a smaller heading to give this section a title',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ],
-          ),
-          bottomNavigationBar: BottomBar(),
+            ),
+          ],
         ),
+        bottomNavigationBar: BottomBar(),
       ),
     );
   }
@@ -114,14 +112,32 @@ class BottomBar extends StatelessWidget {
               text: 'Search',
             ),
             Tab(
+              icon: Icon(Icons.favorite, size: 20),
+              text: 'Saved',
+            ),
+            Tab(
               icon: Icon(
                 Icons.tune,
                 size: 20,
               ),
               text: 'Filter',
-            ),
+            )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Center(
+        child: Text('User Profile Page'),
       ),
     );
   }
