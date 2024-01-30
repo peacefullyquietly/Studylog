@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'detail.dart'; // detail.dart 파일을 import
 
 void main() => runApp(MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
+                  MaterialPageRoute(builder: (context) => MyHomePage()), // MyHomePage 생성자 호출
                 );
               },
             ),
@@ -87,13 +88,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(); // Replace this with your home page widget
   }
 }
 
