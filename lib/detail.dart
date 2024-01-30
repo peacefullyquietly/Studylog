@@ -90,6 +90,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(); // Replace this with your home page widget
+  }
+}
+
 class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
