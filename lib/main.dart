@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'profile.dart'; // profile.dart 파일을 import
 
 void main() {
   runApp(MyApp());
