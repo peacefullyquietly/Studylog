@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_studylog/saved.dart';
+import 'package:flutter_application_studylog/search.dart';
+import 'package:flutter_application_studylog/detail.dart';
 
 void main() {
   runApp(MyApp());

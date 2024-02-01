@@ -7,12 +7,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomePage(),
+      home: SavedPage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

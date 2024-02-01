@@ -7,12 +7,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: MyHomePage(), // MyHomePage를 직접 호출
+      home: DetailPage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -22,17 +22,17 @@ class MyHomePage extends StatelessWidget {
           leading: IconButton(
             icon: Icon(Icons.account_circle, size: 40),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
-              );
+              Navigator.of(context).pop(); // 현재 페이지를 팝하여 이전 페이지로 이동
             },
           ),
           actions: [
             IconButton(
               icon: Icon(Icons.menu, size: 40),
               onPressed: () {
-                // TODO: Menu 아이콘을 눌렀을 때의 동작 추가
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()),
+                );
               },
             ),
           ],
