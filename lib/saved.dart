@@ -1,89 +1,217 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: SavedPage(),
-    );
-  }
-}
-
-class SavedPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.account_circle, size: 40),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
-              );
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.menu, size: 40),
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.account_circle, size: 40),
               onPressed: () {
-                // TODO: Menu 아이콘을 눌렀을 때의 동작 추가
+                // TODO: Profile 아이콘을 눌렀을 때의 동작 추가
               },
             ),
-          ],
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Double click to edit',
-                  prefixIcon: Icon(Icons.search),
-                  suffixIcon: Icon(Icons.clear),
-                  border: OutlineInputBorder(),
-                ),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.menu, size: 40),
+                onPressed: () {
+                  // TODO: Menu 아이콘을 눌렀을 때의 동작 추가
+                },
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Text(
-                '137 results found',
+            ],
+          ),
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 10),
+              Text(
+                '  Saved',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 45,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: 'Another text field',
-                  border: OutlineInputBorder(),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  'You have saved 3 images',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Add a smaller heading to give this section a title',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  Container(
+                    color: Color.fromRGBO(180, 180, 180, 1.0),
+                    width: 150,
+                    height: 150,
+                    margin: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                        Center(
+                          child: Icon(
+                            Icons.photo_library,
+                            size: 50,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Image 1 Heading',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Sub-heading',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    color: Color.fromRGBO(180, 180, 180, 1.0),
+                    width: 150,
+                    height: 150,
+                    margin: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                        Center(
+                          child: Icon(
+                            Icons.photo_library,
+                            size: 50,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Image 2 Heading',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Sub-heading',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+              Row(
+                children: [
+                  Container(
+                    color: Color.fromRGBO(180, 180, 180, 1.0),
+                    width: 150,
+                    height: 150,
+                    margin: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Icon(
+                            Icons.favorite,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                        Center(
+                          child: Icon(
+                            Icons.photo_library,
+                            size: 50,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Image 3 Heading',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  'Sub-heading',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Add more containers with similar structure for other images
+                ],
+              ),
+            ],
+          ),
+          bottomNavigationBar: BottomBar(),
         ),
-        bottomNavigationBar: BottomBar(),
       ),
     );
   }
@@ -124,20 +252,6 @@ class BottomBar extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Center(
-        child: Text('User Profile Page'),
       ),
     );
   }
