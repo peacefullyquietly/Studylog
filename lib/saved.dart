@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(SavedPage());
 }
 
-class MyApp extends StatelessWidget {
+class SavedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,9 +15,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             leading: IconButton(
               icon: Icon(Icons.account_circle, size: 40),
-              onPressed: () {
-                // TODO: Profile 아이콘을 눌렀을 때의 동작 추가
-              },
+              onPressed: () {},
             ),
             actions: [
               IconButton(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(SearchApp());
 
-class MyApp extends StatelessWidget {
+class SearchApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +25,7 @@ class SearchPage extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ProfilePage()),
+                MaterialPageRoute(builder: (context) => MyHomePage()),
               );
             },
           ),
@@ -124,20 +125,6 @@ class BottomBar extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Center(
-        child: Text('User Profile Page'),
       ),
     );
   }

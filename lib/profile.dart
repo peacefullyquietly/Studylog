@@ -1,11 +1,10 @@
-// 얘가 결국 main.dart
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ProfileApp());
 }
 
-class MyApp extends StatelessWidget {
+class ProfileApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

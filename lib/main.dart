@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'saved.dart';
 
 void main() => runApp(MyApp());
 
@@ -125,6 +126,57 @@ class BottomBar extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class BottomNavBar extends StatefulWidget {
+  @override
+  _BottomNavBarState createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SearchPage()));
+        break;
+      case 1:
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => SavedPage()));
+        break;
+      case 2:
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Search',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite),
+          label: 'Saved',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.tune),
+          label: 'Filter',
+        ),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.amber[800],
+      onTap: _onItemTapped,
     );
   }
 }
